@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Random Dog Viewer</title>
+    <link rel="shortcut icon" href="cat.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#333" />
+</head>
+
+<style>
+  
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  background-image: url('https://i.pinimg.com/originals/18/45/31/184531f68d589f38c0fb2494bcfa394b.gif');
+  background-size: cover;
+  height: 100vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+
+
+img {
+  width: 300px;            
+  height: 300px;           
+  object-fit: cover;        
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 2px transparent;
+  box-sizing: content-box;
+  display: block;         
+  margin-left: auto;       
+  margin-right: auto;     
+}
+
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: palevioletred;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px; 
+}
+
+button:hover {
+  background-color: purple;
+}
+
+
+h1 {
+  color: white;
+  font-style: italic; 
+  font-size: 50px;
+  margin-bottom: 20px; 
+}
+
+
+#dog-image-container {
+  width: 500px;      
+  height: 300px;     
+  margin: 20px 0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  
+</style>
+
+</head>
+<body>
+<h1>Random Dog Image</h1><br><br>
+<button onclick="fetchRandomDogImage()">Load More Images!</button>
+<div id="dog-image-container">
+  <img id="dog-image" src="" alt="Random Dog Image">
+</div>
+
+<script>
+  
+  async function fetchRandomDogImage() {
+      try {
+          
+          const response = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await response.json();
+
+          const imageUrl = data.message;
+
+          const dogImageElement = document.getElementById('dog-image');
+          dogImageElement.src = imageUrl;
+      } catch (error) {
+          console.error('Error fetching dog image:', error);
+      }
+  }   
+  window.onload = fetchRandomDogImage;
+</script>
+</body>
+</html>
